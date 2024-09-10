@@ -4,6 +4,11 @@
 >
 	<xsl:output method="html" indent="yes"/>
 
+	<!--Creamos una Variable que reciba un parámetro desde el procesador-->
+	<!--la propiedad "name" establece el nombre de la variable-->
+	<!--la propiedad "select" establece  el origen del dato de la variable-->
+	<xsl:param name="TipoMenu" select="TipoMenu"></xsl:param>
+	
 	<xsl:template match="Menu">
 		<html lang="en">
 			<head>
@@ -78,73 +83,31 @@
 
 						<nav id="navbar" class="navbar order-last order-lg-0">
 							<ul>
-								<li>
-									<a class="nav-link scrollto active" href="#hero">Home</a>
-								</li>
-								<li>
-									<a class="nav-link scrollto" href="#about">About</a>
-								</li>
-								<li>
-									<a class="nav-link scrollto" href="#menu">Menu</a>
-								</li>
-								<li>
-									<a class="nav-link scrollto" href="#specials">Specials</a>
-								</li>
-								<li>
-									<a class="nav-link scrollto" href="#events">Events</a>
-								</li>
-								<li>
-									<a class="nav-link scrollto" href="#chefs">Chefs</a>
-								</li>
-								<li>
-									<a class="nav-link scrollto" href="#gallery">Gallery</a>
-								</li>
-								<li class="dropdown">
-									<a href="#">
-										<span>Drop Down</span>
-										<i class="bi bi-chevron-down"></i>
-									</a>
-									<ul>
-										<li>
-											<a href="#">Drop Down 1</a>
-										</li>
-										<li class="dropdown">
-											<a href="#">
-												<span>Deep Drop Down</span>
-												<i class="bi bi-chevron-right"></i>
-											</a>
-											<ul>
-												<li>
-													<a href="#">Deep Drop Down 1</a>
-												</li>
-												<li>
-													<a href="#">Deep Drop Down 2</a>
-												</li>
-												<li>
-													<a href="#">Deep Drop Down 3</a>
-												</li>
-												<li>
-													<a href="#">Deep Drop Down 4</a>
-												</li>
-												<li>
-													<a href="#">Deep Drop Down 5</a>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<a href="#">Drop Down 2</a>
-										</li>
-										<li>
-											<a href="#">Drop Down 3</a>
-										</li>
-										<li>
-											<a href="#">Drop Down 4</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<a class="nav-link scrollto" href="#contact">Contact</a>
-								</li>
+								<!--creando una lista dinámica a partir de las opciones del XML-->
+								<xsl:for-each select="Opciones/Opcion">
+									<li>
+										<!--xsl:choose funciona como un Switch, permitiendome crear casos que empaten en función de una condición y declarar una condición defautl-->
+										
+										<xsl:choose>
+											<!--xsl:when es equivalente a los "case" del Switch-->
+											<xsl:when test="$TipoMenu = @Id">
+												<!--el uso del "@" hace referencia a un atributo del Nodo en cuestión-->
+												<a class="nav-link scrollto active" href="{@Url}">
+													<xsl:value-of select="@Texto"/>
+												</a>
+											</xsl:when>
+											<!--xsl:otherwise es equivalten al "default" del Switch-->
+											<xsl:otherwise>
+												<!--el uso del "@" hace referencia a un atributo del Nodo en cuestión-->
+												<a class="nav-link scrollto" href="{@Url}">
+													<xsl:value-of select="@Texto"/>
+												</a>
+											</xsl:otherwise>
+											
+										</xsl:choose>
+									</li>
+								</xsl:for-each>
+
 							</ul>
 							<i class="bi bi-list mobile-nav-toggle"></i>
 						</nav>
