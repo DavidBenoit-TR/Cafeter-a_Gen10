@@ -353,14 +353,357 @@
 			</div>
 		</section>
 		<!-- End Why Us Section -->
+
+		<!-- ======= Events Section ======= -->
+		<section id="events" class="events">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-title">
+					<h2>Especialidades</h2>
+					<p>Conoce nuestras especialidades</p>
+				</div>
+
+				<div class="events-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+					<div class="swiper-wrapper">
+
+						<xsl:for-each select="Platillos/Tipo[@Nombre = 'Comidas']/Platillo[@Especialidad = 'SI']">
+
+							<div class="swiper-slide">
+								<div class="row event-item">
+									<div class="col-lg-6">
+										<!--inferimos la imagen en su pocision 1-->
+										<img src="{Imagen[position()=1]}" class="img-fluid" alt=""/>
+									</div>
+									<div class="col-lg-6 pt-4 pt-lg-0 content">
+										<h3>
+											<!--Recuperamos el Nombre del Platillo-->
+											<xsl:value-of select="@Nombre"/>
+										</h3>
+										<div class="price">
+											<p>
+												<span>
+													<!--Recuperamos el precio del Platillo-->
+													<xsl:value-of select="Precio"/>
+												</span>
+											</p>
+										</div>
+										<p class="fst-italic">
+											<!--recuperamos el texto especial-->
+											<xsl:value-of select="TextoEspecial"/>
+										</p>
+										<!--Ingredientes-->
+										<div class="col-lg-12">
+
+											<div class="col-lg-12">
+												<div class="col-lg-6 pt-4 pt-lg-0 content">
+													<h3>
+														<!--recuperamos el nombre de los ingredientes-->
+														<xsl:value-of select="Ingredientes/Ingrediente[position()=1]/@Nombre"/>
+													</h3>
+													<p class="fst-italic">
+														<!--recuperamos el valor de los ingredientes-->
+														<xsl:value-of select="Ingredientes/Ingrediente[position()=1]"/>
+													</p>
+												</div>
+												<!--inferimos la imagen en su pocision 1-->
+												<img src="{Imagen[position()=2]}" class="img-fluid" alt=""/>
+											</div>
+
+											<div class="col-lg-12">
+												<div class="row event-item">
+													<xsl:for-each select="Ingredientes/Ingrediente[position()>1]">
+														<div class="col-lg-6 pt-4 pt-lg-0 content">
+															<h3>
+																<!--recuperamos el nombre de los ingredientes-->
+																<xsl:value-of select="@Nombre"/>
+															</h3>
+															<p class="fst-italic">
+																<!--recuperamos el valor de los ingredientes-->
+																<xsl:value-of select="Ingredientes/Ingrediente[position()=1]"/>
+															</p>
+															<!--inferimos la imagen en su pocision 1-->
+															<img src="{@Imagen}" class="img-fluid" alt=""/>
+														</div>
+													</xsl:for-each>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</xsl:for-each>
+
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+
+			</div>
+		</section>
+		<!-- End Events Section -->
+
+		<!-- ======= Specials Section ======= -->
+		<section id="specials" class="specials">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-title">
+					<h2>Bebidas</h2>
+					<p>Refescate con nuestras deliciosas Bebidas</p>
+				</div>
+
+				<div class="row" data-aos="fade-up" data-aos-delay="100">
+					<!--Barra Lateral-->
+					<div class="col-lg-3">
+						<ul class="nav nav-tabs flex-column">
+							<!--Recorremos cada Bebida por su Nombre y Orden-->
+							<xsl:for-each select="Platillos/Tipo[@Nombre = 'Bebidas']/Platillo">
+								<li class="nav-item">
+									<xsl:choose>
+										<xsl:when test="@Orden = 1">
+											<a class="nav-link show active" data-bs-toggle="tab" href="#tab-{@Orden}">
+												<xsl:value-of select="@Nombre"/>
+											</a>
+										</xsl:when>
+										<xsl:otherwise>
+											<a class="nav-link show" data-bs-toggle="tab" href="#tab-{@Orden}">
+												<xsl:value-of select="@Nombre"/>
+											</a>
+										</xsl:otherwise>
+									</xsl:choose>
+								</li>
+							</xsl:for-each>
+						</ul>
+					</div>
+					<!--Contenido-->
+					<div class="col-lg-9 mt-4 mt-lg-0">
+						<div class="tab-content">
+							<xsl:for-each select="Platillos/Tipo[@Nombre = 'Bebidas']/Platillo">
+								<xsl:choose>
+									<xsl:when test="@Orden = 1">
+										<div class="tab-pane active show" id="tab-{@Orden}">
+											<div class="row">
+												<div class="col-lg-8 details order-2 order-lg-1">
+													<h3>
+														<xsl:value-of select="Precio"/>
+													</h3>
+													<p class="fst-italic">
+														<xsl:value-of select="Descripcion"/>
+													</p>
+												</div>
+												<div class="col-lg-4 text-center order-1 order-lg-2">
+													<img src="{Imagen}" alt="" class="img-fluid"/>
+												</div>
+											</div>
+										</div>
+									</xsl:when>
+									<xsl:otherwise>
+										<div class="tab-pane show" id="tab-{@Orden}">
+											<div class="row">
+												<div class="col-lg-8 details order-2 order-lg-1">
+													<h3>
+														<xsl:value-of select="Precio"/>
+													</h3>
+													<p class="fst-italic">
+														<xsl:value-of select="Descripcion"/>
+													</p>
+												</div>
+												<div class="col-lg-4 text-center order-1 order-lg-2">
+													<img src="{Imagen}" alt="" class="img-fluid"/>
+												</div>
+											</div>
+										</div>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:for-each>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- End Specials Section -->
 	</xsl:template>
 
 	<xsl:template name="Carta">
-		<h1>Hola desde Carta</h1>
+		<!-- ======= Menu Section ======= -->
+		<section id="menu" class="menu section-bg">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-title">
+					<h2>Menu</h2>
+					<p>Deleitate con nuestro delicioso Menu</p>
+				</div>
+
+				<div class="row" data-aos="fade-up" data-aos-delay="100">
+					<div class="col-lg-12 d-flex justify-content-center">
+						<ul id="menu-flters">
+							<!--Dejamos el principal que nos mostrara todas las secciones-->
+							<li data-filter="*" class="filter-active">All</li>
+							<!--recorremos cada tipo de platillo para crear las opcioens-->
+							<xsl:for-each select="Platillos/Tipo">
+								<li data-filter=".filter-{@Nombre}">
+									<xsl:value-of select="@Nombre"/>
+								</li>
+							</xsl:for-each>
+						</ul>
+					</div>
+				</div>
+
+				<div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+
+					<!--Recorremos cada tipo de paltillo -->
+					<xsl:for-each select="Platillos/Tipo/Platillo">
+						<div class="col-lg-6 menu-item filter-{../@Nombre}">
+							<img src="{Imagen}" class="menu-img" alt=""/>
+							<div class="menu-content">
+								<a href="#">
+									<!--recuperamoss el nombre del paltillo-->
+									<xsl:value-of select="@Nombre"/>
+								</a>
+								<span>
+									<!--recuperamos el precio del platillo-->
+									<xsl:value-of select="Precio"/>
+								</span>
+							</div>
+							<div class="menu-ingredients">
+								<!--recuperamos lka descripcion del platillo-->
+								<xsl:value-of select="Descripcion"/>
+							</div>
+						</div>
+					</xsl:for-each>
+
+				</div>
+
+			</div>
+		</section>
+		<!-- End Menu Section -->
 	</xsl:template>
 
 	<xsl:template name="Contacto">
-		<h1>Hola desde Contacto</h1>
+		<!-- ======= Contact Section ======= -->
+		<section id="contact" class="contact">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-title">
+					<h2>Contacto</h2>
+					<p>Queremos Escucharte</p>
+				</div>
+			</div>
+			<!--Mapa-->
+			<div data-aos="fade-up">
+				<!--<iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen=""></iframe>-->
+				<style>
+					#map {
+					border:0;
+					width: 100%;
+					height: 350px;
+					}
+				</style>
+
+				<div id="google-map">
+					<div id="map"></div>
+				</div>
+				<text id="direccion"> esta es una etiqueta de texto </text>
+				<div class="col-lg-12 margin-bottom-30" id="street"></div>
+			</div>
+			<!--Datos y Formulario-->
+			<div class="container" data-aos="fade-up">
+
+				<div class="row mt-5">
+					<!--Datos de Contacto-->
+					<div class="col-lg-4">
+						<div class="info">
+							<div class="address">
+								<i class="bi bi-geo-alt"></i>
+								<h4>Direccion:</h4>
+								<p>
+									<xsl:value-of select="Datos/Direccion"/>
+								</p>
+							</div>
+
+							<div class="open-hours">
+								<i class="bi bi-clock"></i>
+								<h4>Horarios:</h4>
+								<xsl:for-each select="Datos/Horarios/Horario">
+									<p>
+										<xsl:value-of select="."/>
+									</p>
+								</xsl:for-each>
+							</div>
+
+							<div class="email">
+								<i class="bi bi-envelope"></i>
+								<h4>Email:</h4>
+								<p>
+									<a href="mailto:{Datos/correo}">
+										<xsl:value-of select="Datos/correo"/>
+									</a>
+								</p>
+							</div>
+
+							<div class="phone">
+								<i class="bi bi-phone"></i>
+								<h4>Telefono:</h4>
+								<p>
+									<xsl:value-of select="Datos/Telefono"/>
+								</p>
+							</div>
+
+						</div>
+
+					</div>
+					<!--Formulario-->
+					<div class="col-lg-8 mt-5 mt-lg-0">
+						<!--Action => se refiere a la acción que se ejecutará al enviar le formulario, generalemnte usamos una URL o bien un controlador-->
+						<!--method => hace referencia al cómo se enviará la petición del formulario, en esta caso y en su mayoría lo enviamos bajo una petición 'POST' que significa que enviará los datos en 2do plano dentro del cuerpo de la petición-->
+						<form action="#" method="post" role="form" class="php-email-form">
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<input type="text" name="contac_name" class="form-control" id="contac_name" placeholder="Ingresa tu nombre" required=""/>
+								</div>
+								<div class="col-md-6 form-group mt-3 mt-md-0">
+									<input type="email" class="form-control" name="contact_email" id="contact_email" placeholder="Ingrese su email" required=""/>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<input type="number" name="contac_people" class="form-control" id="contac_people" required="true" max="8" min="1" placeholder="# de Personas"/>
+								</div>
+								<div class="col-md-6 form-group mt-3 mt-md-0">
+									<input type="number" class="form-control" name="contact_add" id="contact_add" required="true" max="4" min="0" placeholder="# de Personas adicionales"/>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6 form-group mt-3 mt-md-0">
+									<input type="date" id="contact_fecha" name="contact_fecha" class="form-control" required="true"></input>
+								</div>
+
+								<div class="col-md-6 form-group mt-3 mt-md-0">
+									<input type="time" id="contact_hora" name="contact_hora" class="form-control" required ="true" max="19:00:00" min="08:00:00"></input>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-6 form-group mt-3 mt-md-0">
+									<output id="total" class="form-control" disable="true"></output>
+								</div>
+							</div>
+
+							<div class="text-center">
+								<button type="submit">Send Message</button>
+							</div>
+						</form>
+
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+		<!-- End Contact Section -->
 	</xsl:template>
 
 	<xsl:template name="PlayRoom">
