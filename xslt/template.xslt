@@ -8,7 +8,7 @@
 	<!--la propiedad "name" establece el nombre de la variable-->
 	<!--la propiedad "select" establece  el origen del dato de la variable-->
 	<xsl:param name="TipoMenu" select="TipoMenu"></xsl:param>
-	
+
 	<xsl:template match="Menu">
 		<html lang="en">
 			<head>
@@ -87,7 +87,7 @@
 								<xsl:for-each select="Opciones/Opcion">
 									<li>
 										<!--xsl:choose funciona como un Switch, permitiendome crear casos que empaten en función de una condición y declarar una condición defautl-->
-										
+
 										<xsl:choose>
 											<!--xsl:when es equivalente a los "case" del Switch-->
 											<xsl:when test="$TipoMenu = @Id">
@@ -103,7 +103,7 @@
 													<xsl:value-of select="@Texto"/>
 												</a>
 											</xsl:otherwise>
-											
+
 										</xsl:choose>
 									</li>
 								</xsl:for-each>
@@ -141,6 +141,27 @@
 					</div>
 				</section>
 				<!-- End Hero -->
+
+				<!-- ======= Choose Section ======= -->
+				<xsl:choose>
+					<xsl:when test="$TipoMenu = 0">
+						<!--xsl:call-template me ayuda a invocar un template que contiene información o estructurar dentro del mismo, y así inferiro dentro del template principal-->
+						<xsl:call-template name="Home"></xsl:call-template>
+					</xsl:when>
+					<xsl:when test="$TipoMenu = 1">
+						<xsl:call-template name="Carta"></xsl:call-template>
+					</xsl:when>
+					<xsl:when test="$TipoMenu = 2">
+						<xsl:call-template name="Contacto"></xsl:call-template>
+					</xsl:when>
+					<xsl:when test="$TipoMenu = 3">
+						<xsl:call-template name="PlayRoom"></xsl:call-template>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="Home"></xsl:call-template>
+					</xsl:otherwise>
+				</xsl:choose>
+				<!-- Choose Main -->
 
 				<!-- ======= Footer ======= -->
 				<footer id="footer">
@@ -280,4 +301,70 @@
 			</body>
 		</html>
 	</xsl:template>
+
+
+	<xsl:template name="Home">
+		<!-- ======= Why Us Section ======= -->
+		<section id="why-us" class="why-us">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-title">
+					<h2>Popular Items</h2>
+					<p>Nuestros mejores platillos</p>
+				</div>
+
+				<div class="row">
+					<!--Productos Populares desde el XML-->
+					<!--Creo un recorrido para seleccionar el primer platillo de cada tipo de platillo excepto de bebidas-->
+					<xsl:for-each select="Platillos/Tipo[@Nombre != 'Bebidas']/Platillo[@Orden=1]">
+						<div class="col-lg-4 mt-4 mt-lg-0">
+							<div class="box" data-aos="zoom-in" data-aos-delay="300">
+								<div class="section-title">
+									<!--Aquí muestro el nombre del tipo-->
+									<h2>
+										<xsl:value-of select="../@Nombre"/>
+									</h2>
+								</div>
+								<h4>
+									<!--Aquí muestro el nombre del Platillo-->
+									<span style="display: contents;">
+										<!--substring(cadena, lugar inicial, numero de pasos)-->
+										<xsl:value-of select="substring(@Nombre, 1, 1)"/>
+									</span>
+									<!--string-length(cadena) => el total de datos de la cadena-->
+									<xsl:value-of select="substring(@Nombre, 2, string-length(@Nombre))"/>
+								</h4>
+								<p>
+									<!--Aquí muestro la descripción del platillo-->
+									<xsl:value-of select="Descripcion"/>
+								</p>
+								<h5>
+									<!--Aquí muestro el precio del platillo-->
+									<xsl:value-of select="Precio"/>
+								</h5>
+								<br></br>
+								<img src="{Imagen}" alt="" style="width: 100%; height: auto;"/>
+							</div>
+						</div>
+					</xsl:for-each>
+
+				</div>
+
+			</div>
+		</section>
+		<!-- End Why Us Section -->
+	</xsl:template>
+
+	<xsl:template name="Carta">
+		<h1>Hola desde Carta</h1>
+	</xsl:template>
+
+	<xsl:template name="Contacto">
+		<h1>Hola desde Contacto</h1>
+	</xsl:template>
+
+	<xsl:template name="PlayRoom">
+		<h1>Hola desde PlayRoom</h1>
+	</xsl:template>
+
 </xsl:stylesheet>
