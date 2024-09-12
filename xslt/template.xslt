@@ -38,6 +38,8 @@
 				<!-- Template Main CSS File -->
 				<link href="assets/css/style.css" rel="stylesheet"/>
 
+				<!--JS References-->
+				<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
 				<!-- =======================================================
   * Template Name: Restaurantly - v3.1.0
   * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
@@ -296,6 +298,8 @@
 				<script src="assets/vendor/php-email-form/validate.js"></script>
 				<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
+				<!--JQUERY-->
+				<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
 				<!-- Template Main JS File -->
 				<script src="assets/js/main.js"></script>
 			</body>
@@ -693,15 +697,76 @@
 							</div>
 
 							<div class="text-center">
-								<button type="submit">Send Message</button>
+								<!--<button type="submit">Send Message</button>-->
+								<a class="book-a-table-btn" id="miBoton" onclick="enviar_formulario()">Presionar</a>
 							</div>
 						</form>
-
 					</div>
-
 				</div>
-
 			</div>
+
+			<script>
+				// $ => Uso de Jquery
+				// (document) => hace referencia al objeto que deseo obtener y/o manipular
+				//.ready() => evento que se dispara una vez que el DOM ha sido cargado
+				//function (){} => Es un funcion anonima
+				$(document).ready(function () {
+				console.log("Hola desde el Script usando JQuery");
+
+				//recuperar la fecha actual del servidor (donde se ejecuta el sistema)
+				var now = new Date(Date.now());
+				//recuperar el control de "contect_hora"
+				var timeControl = document.getElementById("contact_hora");
+				//recupero la hora y los minutos actuales del servidor
+				var horas = now.getHours();
+				var minutos = now.getMinutes();
+
+				//imprimo en la consola los resultados
+				console.log("La hora actual es: " + horas + ":" + minutos);
+				console.log("horas: " + horas);
+				console.log("minutos: " + minutos);
+				console.log("timeControl: ");
+				console.log(timeControl);
+
+				//validar Formato de Hora (validar 0)
+				if (horas <![CDATA[<]]> 10) {
+				horas = "0" + horas;
+				}
+				if (minutos <![CDATA[<]]> 10) {
+				minutos = "0" + minutos;
+				}
+				//concatenar hora y minutos
+				var formatted = horas + ":" + minutos;
+				console.log("formatted: " + formatted);
+
+				//Asignar los valores usando JS, JQuery(2) al elemento 'contact_hora'
+				//JS
+				// var timeControl = document.getElementById("contact_hora");
+				// timeControl.value = formatted;
+				//JQuery asignando Valor
+				// $("#contact_hora").val(formatted);
+				//Jquery apelando al atributo
+				$("#contact_hora").attr("value", formatted);
+
+				//Para la fecha
+				var dia = now.getDate();
+				var mes = now.getMonth() + 1;
+				var anio = now.getFullYear();
+
+
+				// Operación ternaria
+				//condición ? verdadero : falso
+				mes = mes <![CDATA[<]]> 10 ? "0" + mes : mes;
+				dia = dia <![CDATA[<]]> 10 ? "0" + dia : dia;
+
+				var fechaFormatted = anio + "-" + mes + "-" + dia;
+
+				console.log("fechaFormatted: " + fechaFormatted);
+				$("#contact_fecha").attr("value", fechaFormatted);
+				});
+
+			</script>
+
 		</section>
 		<!-- End Contact Section -->
 	</xsl:template>
