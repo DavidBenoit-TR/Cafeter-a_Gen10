@@ -144,7 +144,7 @@ function Sumar() {
     var a = parseInt(personas.value)
     var b = parseInt(personas_add.value)
 
-    if (a < 0 || b < 0) {
+    if (a <= 0 || b < 0) {
         posible = false
         icono = "warning"
         titulo = "Algo salió mal"
@@ -216,6 +216,8 @@ function getGeo() {
 
 function geoOK(position) {
     console.log(position)
+    showLatLong(position.coords.latitude, position.coords.longitude)
+    initMap2(position.coords.latitude, position.coords.longitude)
 }
 
 function geoERROR(error) {
@@ -232,4 +234,67 @@ function geoERROR(error) {
         console.log("Error: " + error.code)
         alert("Error: " + error.code)
     }
+}
+
+function showLatLong(lat, long) {
+    var geocoder = new google.maps.Geocoder(); //esto servirá para serializar las coordenadas para el street view
+    var milocalizacion = new google.maps.LatLng(lat, long); //convierte mis coordenadas en el formato para el mapa de Google
+    console.log(milocalizacion)
+    //Generamos la dirección
+    geocoder.geocode({ 'latLng': milocalizacion }, processGeocoder);
+}
+
+function processGeocoder(result, status) {
+    //imprimimos lo que estamos recibiendo en la función
+    console.log(result);
+    console.log(status);
+    if (status == google.maps.GeocoderStatus.OK) {
+        //esperamos los resultados de google para obtener una direcciónr real en lugar de solo coordenadas
+        if (result[0]) {
+            var direccion = result[0].formatted_address;
+            //buscamos (usando JQUERY) el elemnto #direccion y colocamos la dirección que nos respondió Google
+            $("#direccion").html(direccion);
+        }
+        else {
+            error("Google no retornó ningún resultado");
+        }
+    }
+    else {
+        error("Google marcó un Error");
+    }
+}
+
+let map;
+
+async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps");
+}
+
+function initMap2(lat, lng) {
+    //genero la información para obtener un mapa desde Google
+    var miscoordenadas = new google.maps.LatLng(lat, lng);
+    //configuro las opciones para mi mapa
+    var mapoptions = {
+        zoom: 15,
+        center: miscoordenadas,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    //imprimo el mapa en pantalla
+    var map = new google.maps.Map(document.getElementById("map"), mapoptions)
+    //Configuro un marcador de posición par ami mapa
+    new google.maps.Marker({
+        position: miscoordenadas,
+        map,
+        title: "Hello World!"
+    });
+
+    //con Jquery asigno un tamaño al espacio del streetview
+    $("#street").css("height", 300);
+    //creo y configuro el streetview
+    var panorama = new google.maps.StreetViewPanorama(document.getElementById("street"),
+        { position: miscoordenadas, pov: { heading: 90, pitch: 5 } })
+    //muestro el street view
+    map.setStreetView(panorama)
+    //recargo el mapa por ultima ocasión
+    window.initMap = initMap;
 }
