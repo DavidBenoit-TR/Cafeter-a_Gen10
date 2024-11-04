@@ -767,10 +767,10 @@
 
 				console.log("fechaFormatted: " + fechaFormatted);
 				$("#contact_fecha").attr("value", fechaFormatted);
-				
-				
+
+
 				getGeo()
-				
+
 				});
 
 			</script>
@@ -831,7 +831,55 @@
 				<!--Cuadro4 (papelera)-->
 				<div id="papelera" ondragenter="return enter(event)" ondragover="return over(event)" ondragleave="return leave(event)" ondrop="return remove(event)"></div>
 			</section>
-	</div>
+
+			<!--Modelos-->
+			<section class="tm-section-row p-5">
+				<br></br>
+				<br></br>
+				<h2>Modelos</h2>
+				<div>
+					<xsl:for-each select="Modelo">
+						<h2>
+							Modelo:
+							<xsl:value-of select="@nombre"/>
+						</h2>
+						<xsl:choose>
+							<xsl:when test="count(Material) > 0">
+								<p>
+									total de materiales:
+									<xsl:value-of select="count(Material)"/>
+								</p>
+							</xsl:when>
+							<xsl:otherwise>
+								<p>
+									total de tipos:
+									<xsl:value-of select="count(Tipo)"/>
+								</p>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:for-each>
+				</div>
+			</section>
+			
+			<!--Accesorios-->
+			<section class="tm-section-row p-5">
+				<br></br>
+				<br></br>
+				<h2>Accesorios</h2>
+				<div>
+					<xsl:for-each select="Accesorios/Tipo">
+						<h2>
+							Tipo:
+							<xsl:value-of select="@nombre"/>
+						</h2>
+						<p>
+							total de tipos:
+							<xsl:value-of select="count(.)"/>
+						</p>
+					</xsl:for-each>
+				</div>
+			</section>
+		</div>
 	</xsl:template>
 
 </xsl:stylesheet>

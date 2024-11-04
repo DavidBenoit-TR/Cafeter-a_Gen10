@@ -154,4 +154,314 @@
 			<Horario>Domingos: 08:00 a 16:00</Horario>
 		</Horarios>
 	</Datos>
+
+	<Modelo nombre="Casual" Orden="1">
+		<Material nombre="Algodon">
+			<Tipo nombre="Vestido">
+				<Nombre>Vestido Juvenil</Nombre>
+				<codigo>JUN3001</codigo>
+				<Descripcion>
+					VESTIDO HUESO CON FLORES
+				</Descripcion>
+				<Caracteristicas>
+					<Talla>Chica,mediana,Grande,ExtraGrande</Talla>
+					<Color>Hueso,Negro</Color>
+					<Estampado>HOJAS VERDES AMARILLAS</Estampado>
+				</Caracteristicas>
+				<Precio><![CDATA[$390]]></Precio>
+				<Imagen></Imagen>
+			</Tipo>
+			<Tipo nombre="Vestido sublimado">
+				<Nombre>Vestido Manga Corta</Nombre>
+				<codigo>JUN3002</codigo>
+				<Descripcion>VESTIDO MANGA CORTA MICKEY MOUSE</Descripcion>
+				<Caracteristicas>
+					<Talla>Chica,mediana,Grande</Talla>
+					<Color>Verde</Color>
+					<Estampado>SUBLIMADO MICKEY MOUSE</Estampado>
+				</Caracteristicas>
+				<Precio><![CDATA[$290]]></Precio>
+				<Imagen>assets/img/IMG1</Imagen>
+			</Tipo>
+			<Tipo nombre="Blusas">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+
+			</Tipo>
+			<Tipo nombre="Short">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+			</Tipo>
+		</Material>
+		<Material nombre="Mezclilla">
+			<Tipo nombre="Vestido">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+
+			</Tipo>
+			<Tipo nombre="Blusas">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+
+			</Tipo>
+			<Tipo nombre="Short">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+			</Tipo>
+		</Material>
+	</Modelo>
+	<Modelo nombre="Formal" Orden="2">
+		<Tipo nombre="Vestidos Exclusivos" Exclusivos="SI">
+			<Nombre></Nombre>
+			<codigo>
+			</codigo>
+			<Descripcion></Descripcion>
+			<Caracteristicas>
+				<Talla></Talla>
+				<Color></Color>
+			</Caracteristicas>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+		<Tipo nombre="Vestidos">
+			<Nombre></Nombre>
+			<codigo>
+			</codigo>
+			<Descripcion></Descripcion>
+			<Caracteristicas>
+				<Talla></Talla>
+				<Color></Color>
+			</Caracteristicas>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+		<Tipo nombre="Conjunto">
+			<Nombre></Nombre>
+			<codigo>
+			</codigo>
+			<Descripcion></Descripcion>
+			<Caracteristicas>
+				<Talla></Talla>
+				<Color></Color>
+			</Caracteristicas>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+		<Tipo nombre="Saco">
+			<Nombre></Nombre>
+			<codigo>
+			</codigo>
+			<Descripcion></Descripcion>
+			<Caracteristicas>
+				<Talla></Talla>
+				<Color></Color>
+			</Caracteristicas>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+		<Tipo nombre="Palazzo">
+			<Nombre></Nombre>
+			<codigo>
+			</codigo>
+			<Descripcion></Descripcion>
+			<Caracteristicas>
+				<Talla></Talla>
+				<Color></Color>
+			</Caracteristicas>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+	</Modelo>
+	<Modelo nombre="Embarazada" Orden="3">
+		<Material nombre="Algodon">
+			<Tipo nombre="Vestido">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+
+			</Tipo>
+			<Tipo nombre="Blusas">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+
+			</Tipo>
+			<Tipo nombre="Short">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+			</Tipo>
+		</Material>
+		<Material nombre="Mezclilla">
+			<Tipo nombre="Vestido">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+
+			</Tipo>
+			<Tipo nombre="Blusas">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+
+			</Tipo>
+			<Tipo nombre="Short">
+				<Nombre></Nombre>
+				<codigo>
+				</codigo>
+				<Descripcion></Descripcion>
+				<Caracteristicas>
+					<Talla></Talla>
+					<Color></Color>
+				</Caracteristicas>
+				<Precio></Precio>
+				<Imagen></Imagen>
+			</Tipo>
+		</Material>
+	</Modelo>
+	<Modelo nombre="Frio" Orden="4">
+		<Tipo nombre="Chamarra">
+			<Nombre></Nombre>
+			<codigo>
+			</codigo>
+			<Descripcion></Descripcion>
+			<Caracteristicas>
+				<Talla></Talla>
+				<Color></Color>
+			</Caracteristicas>
+			<Precio></Precio>
+			<Imagen></Imagen>
+
+		</Tipo>
+		<Tipo nombre="Sudadera">
+			<Nombre></Nombre>
+			<codigo>
+			</codigo>
+			<Descripcion></Descripcion>
+			<Caracteristicas>
+				<Talla></Talla>
+				<Color></Color>
+			</Caracteristicas>
+			<Precio></Precio>
+			<Imagen></Imagen>
+
+		</Tipo>
+		<Tipo nombre="Mayones">
+			<Nombre></Nombre>
+			<codigo>
+			</codigo>
+			<Descripcion></Descripcion>
+			<Caracteristicas>
+				<Talla></Talla>
+				<Color></Color>
+			</Caracteristicas>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+		<Tipo nombre="Blusas">
+			<Nombre></Nombre>
+			<codigo>
+			</codigo>
+			<Descripcion></Descripcion>
+			<Caracteristicas>
+				<Talla></Talla>
+				<Color></Color>
+			</Caracteristicas>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+	</Modelo>
+
+	<Accesorios>
+		<Tipo nombre="Gorros">
+			<Descripcion></Descripcion>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+		<Tipo nombre="Gorra Dragon Ball">
+			<Descripcion></Descripcion>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+		<Tipo nombre="Collar y Aretes">
+			<Descripcion></Descripcion>
+			<Precio></Precio>
+			<Imagen></Imagen>
+		</Tipo>
+	</Accesorios>
 </Menu>
