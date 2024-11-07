@@ -40,6 +40,9 @@
 
 				<!--JS References-->
 				<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 				<!-- =======================================================
   * Template Name: Restaurantly - v3.1.0
   * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
@@ -369,7 +372,7 @@
 
 				<div class="events-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
 					<div class="swiper-wrapper">
-
+						<!--Recorremos todos los platillos para seleccionar solo aquellos que son especialidad-->
 						<xsl:for-each select="Platillos/Tipo[@Nombre = 'Comidas']/Platillo[@Especialidad = 'SI']">
 
 							<div class="swiper-slide">
@@ -587,7 +590,7 @@
 		<!-- ======= Contact Section ======= -->
 
 		<!--Referencia a mi archivo JS-->
-		<script src="assets/js/MiScript.js" type="text/javascript"></script>
+		<script src="assets/js/MiScript2.js" type="text/javascript"></script>
 
 		<section id="contact" class="contact">
 			<div class="container" data-aos="fade-up">
@@ -667,16 +670,16 @@
 						<form action="#" method="post" role="form" class="php-email-form">
 							<div class="row">
 								<div class="col-md-6 form-group">
-									<input type="text" name="contac_name" class="form-control" id="contac_name" placeholder="Ingresa tu nombre" required=""/>
+									<input type="text" name="contact_name" class="form-control" id="contact_name" placeholder="Ingresa tu nombre" required=""/>
 								</div>
 								<div class="col-md-6 form-group mt-3 mt-md-0">
-									<input type="email" class="form-control" name="contact_email" id="contact_email" placeholder="Ingrese su email" required=""/>
+									<input type="email" class="form-control" name="contact_mail" id="contact_mail" placeholder="Ingrese su email" required=""/>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-md-6 form-group">
-									<input type="number" name="contac_people" class="form-control" id="contac_people" required="true" max="8" min="1" placeholder="# de Personas"/>
+									<input type="number" name="contact_people" class="form-control" id="contact_people" required="true" max="8" min="1" placeholder="# de Personas"/>
 								</div>
 								<div class="col-md-6 form-group mt-3 mt-md-0">
 									<input type="number" class="form-control" name="contact_add" id="contact_add" required="true" max="4" min="0" placeholder="# de Personas adicionales"/>
@@ -700,9 +703,9 @@
 								</div>
 							</div>
 
+							<!--<button type="submit">Send Message</button>-->
 							<div class="text-center">
-								<!--<button type="submit">Send Message</button>-->
-								<a class="book-a-table-btn" id="miBoton" onclick="enviar_formulario()">Presionar</a>
+								<a class="book-a-table-btn" id="miBoton" onclick="enviarFormulario()">Presionar</a>
 							</div>
 						</form>
 					</div>
@@ -768,10 +771,11 @@
 				console.log("fechaFormatted: " + fechaFormatted);
 				$("#contact_fecha").attr("value", fechaFormatted);
 
-
-				getGeo()
+				$("#contact_people").attr("value", 1);
+				$("#contact_add").attr("value", 0);
 
 				});
+				getGeo()
 
 			</script>
 
@@ -860,7 +864,7 @@
 					</xsl:for-each>
 				</div>
 			</section>
-			
+
 			<!--Accesorios-->
 			<section class="tm-section-row p-5">
 				<br></br>
