@@ -9,6 +9,8 @@
 
     // Asignar el evento 'click' al botón
     $('#miBoton').on('click', enviarFormulario);
+
+    initMap();
 });
 
 // Función principal de envío del formulario
@@ -101,93 +103,101 @@ function mostrarAlerta(icono, titulo, mensaje) {
 
 
 //Google Maps
-function getGeo() {
-    if (navigator && navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(geoOK, geoERROR)
-    }
+
+
+// Función para inicializar el mapa de Google
+function initMap() {
+    // Esta función será llamada cuando el script de Google Maps haya cargado correctamente
+    obtenerUbicacion();
 }
 
-function geoOK(position) {
-    console.log(position)
-    showLatLong(position.coords.latitude, position.coords.longitude)
-    initMap2(position.coords.latitude, position.coords.longitude)
-}
-
-function geoERROR(error) {
-    if (error.code == 1) {
-        console.log("El usuario negó el permiso")
-        alert("El usuario negó el permiso")
-    } else if (error.code == 2) {
-        console.log("No se puede recuperar la Ubicación")
-        alert("No se puede recuperar la Ubicación")
-    } else if (error.code == 3) {
-        console.log("Expiró el tiempo de respuesta")
-        alert("Expiró el tiempo de respuesta")
+// Función para obtener la geolocalización
+function obtenerUbicacion() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(mostrarUbicacion, mostrarError);
     } else {
-        console.log("Error: " + error.code)
-        alert("Error: " + error.code)
+        alert("La geolocalización no es soportada por este navegador.");
     }
 }
 
-function showLatLong(lat, long) {
-    var geocoder = new google.maps.Geocoder(); //esto servirá para serializar las coordenadas para el street view
-    var milocalizacion = new google.maps.LatLng(lat, long); //convierte mis coordenadas en el formato para el mapa de Google
-    console.log(milocalizacion)
-    //Generamos la dirección
-    geocoder.geocode({ 'latLng': milocalizacion }, processGeocoder);
+// Función que se ejecuta si la geolocalización es exitosa
+function mostrarUbicacion(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    // Mostrar la latitud y longitud
+    console.log("Latitud: " + lat + ", Longitud: " + lon);
+
+    // Llamar a la función para obtener la dirección
+    obtenerDireccion(lat, lon);
+
+    // Inicializar el mapa y el Street View
+    initMapComponents(lat, lon);
 }
 
-function processGeocoder(result, status) {
-    //imprimimos lo que estamos recibiendo en la función
-    console.log(result);
-    console.log(status);
-    if (status == google.maps.GeocoderStatus.OK) {
-        //esperamos los resultados de google para obtener una direcciónr real en lugar de solo coordenadas
-        if (result[0]) {
-            var direccion = result[0].formatted_address;
-            //buscamos (usando JQUERY) el elemnto #direccion y colocamos la dirección que nos respondió Google
-            $("#direccion").html(direccion);
+// Función que se ejecuta en caso de error en la geolocalización
+function mostrarError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            alert("El usuario negó el permiso de ubicación.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("La ubicación no está disponible.");
+            break;
+        case error.TIMEOUT:
+            alert("Se agotó el tiempo de espera.");
+            break;
+        default:
+            alert("Error desconocido: " + error.message);
+            break;
+    }
+}
+
+// Función para obtener la dirección de las coordenadas
+function obtenerDireccion(lat, lon) {
+    const latLng = { lat: lat, lng: lon };
+    const geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ location: latLng }, function (results, status) {
+        if (status === 'OK') {
+            if (results[0]) {
+                const direccion = results[0].formatted_address;
+                // Mostrar la dirección obtenida en el HTML
+                document.getElementById('direccion').innerText = "Dirección: " + direccion;
+            } else {
+                alert("No se encontraron resultados de dirección.");
+            }
+        } else {
+            alert("Geocodificación fallida: " + status);
         }
-        else {
-            error("Google no retornó ningún resultado");
-        }
-    }
-    else {
-        error("Google marcó un Error");
-    }
+    });
 }
 
-let map;
+// Función para inicializar el mapa y el Street View
+function initMapComponents(lat, lon) {
+    const ubicacion = { lat: lat, lng: lon };
 
-async function initMap() {
-    const { Map } = await google.maps.importLibrary("maps");
-}
-
-function initMap2(lat, lng) {
-    //genero la información para obtener un mapa desde Google
-    var miscoordenadas = new google.maps.LatLng(lat, lng);
-    //configuro las opciones para mi mapa
-    var mapoptions = {
+    // Inicializar el mapa
+    const mapa = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
-        center: miscoordenadas,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    //imprimo el mapa en pantalla
-    var map = new google.maps.Map(document.getElementById("map"), mapoptions)
-    //Configuro un marcador de posición par ami mapa
-    new google.maps.Marker({
-        position: miscoordenadas,
-        map,
-        title: "Hello World!"
+        center: ubicacion
     });
 
-    //con Jquery asigno un tamaño al espacio del streetview
-    $("#street").css("height", 300);
-    //creo y configuro el streetview
-    var panorama = new google.maps.StreetViewPanorama(document.getElementById("street"),
-        { position: miscoordenadas, pov: { heading: 90, pitch: 5 } })
-    //muestro el street view
-    map.setStreetView(panorama)
-    //recargo el mapa por ultima ocasión
-    window.initMap = initMap;
+    // Añadir un marcador en el mapa
+    new google.maps.Marker({
+        position: ubicacion,
+        map: mapa,
+        title: "Ubicación Actual"
+    });
+
+    // Configurar Street View
+    const panorama = new google.maps.StreetViewPanorama(
+        document.getElementById("street"), {
+        position: ubicacion,
+        pov: { heading: 90, pitch: 5 }
+    }
+    );
+
+    // Vincular el Street View al mapa
+    mapa.setStreetView(panorama);
 }
